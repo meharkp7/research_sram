@@ -1,0 +1,19 @@
+services:
+  research_sram:
+    build: .
+    container_name: research_sram
+
+    working_dir: /workspace
+
+    stdin_open: true
+    tty: true
+
+    environment:
+      - DISPLAY=host.docker.internal:0
+    
+    volumes:
+      - ../:/workspace
+      - /tmp/.X11-unix:/tmp/.X11-unix
+
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

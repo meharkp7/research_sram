@@ -1,0 +1,32 @@
+*=========================================================
+* Experiment 001 : NMOS Id-VGS Characterization
+* Technology : SKY130A
+*=========================================================
+
+.title NMOS Id-VGS Characterization
+
+.lib /usr/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+
+.option temp=27
+
+VDS drain 0 1.8
+VGS gate 0 0
+VS source 0 0
+VB bulk 0 0
+
+M1 drain gate source bulk sky130_fd_pr__nfet_01v8 \
++ W=1u L=0.15u
+
+.dc VGS 0 1.8 0.01
+
+.control
+
+run
+
+wrdata ../results/id_vgs.csv i(VDS)
+
+quit
+
+.endc
+
+.end

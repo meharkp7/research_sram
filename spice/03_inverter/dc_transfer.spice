@@ -1,0 +1,18 @@
+* CMOS Inverter
+
+.model MyNMOS NMOS (LEVEL=1 VTO=0.6 KP=250u LAMBDA=0.02)
+.model MyPMOS PMOS (LEVEL=1 VTO=-0.6 KP=120u LAMBDA=0.02)
+
+V1 VDD 0 DC 1.8
+V2 VIN 0 DC 0.0
+M1 VOUT VIN VDD VDD MyPMOS L=1.8e-07 W=2e-06
+M2 VOUT VIN 0 0 MyNMOS L=1.8e-07 W=1e-06
+
+.dc V2 0 1.8 0.01
+
+.control
+run
+print dc v(VOUT)
+.endc
+
+.end
